@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <h2 style="text-align: center">ĐÂY LÀ BLOG CỦA THAODZ</h2>
+    <a href="/create" class="btn btn-success">Create</a>
+    <br>
+    <br>
+    <form action="/find" method="get">
+        <input type="text" class="form-control" placeholder="search" name="findName">
+        <button type="submit" class="btn btn-success">Find</button>
+    </form>
+
+    <br>
+    <br>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>STT</th>
+            <th>Date</th>
+            <th>Name</th>
+            <th>Image</th>
+            <th>Music</th>
+            <th>Bình Luận</th>
+            <th>Trạng Thái</th>
+            <th>Đọc blog</th>
+            <th>Sửa</th>
+            <th>Xóa</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="blog,loop:${list}">
+            <td th:text="${blog.id}"></td>
+            <td th:text="${blog.date}"></td>
+            <td th:text="${blog.name}"></td>
+            <td><img th:src="${blog.image}" width="100px" height="100px"></td>
+            <td th:text="${blog.fileNhac}"></td>
+            <td th:text="${blog.binhLuan}"></td>
+            <td th:text="${blog.trangThai}"></td>
+            <td><a th:href="@{/readBlog{index}(index=${loop.index})}" class="btn btn-success">Read</a></td>
+            <td><a th:href="@{/edit/{index}(index = ${loop.index})}" class="btn btn-warning">Edit</a></td>
+            <td><a th:href="@{/delete/{index}(index = ${loop.index})}" class="btn btn-danger">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
